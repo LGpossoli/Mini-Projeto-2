@@ -25,3 +25,7 @@ Depois da análise inicial, eu dividi os dados em treino, validação e teste us
 ## Etapa de modelos
 
 Eu escolhi três modelos para comparar comportamentos diferentes. O KNN foi usado por trabalhar com proximidade entre exemplos, a Random Forest por combinar várias árvores de decisão e a MLP por representar uma rede neural simples. Em cada modelo eu testei mais de uma configuração para não depender de um único ajuste.
+
+## Etapa de robustez OOD
+
+No teste de robustez, eu removi os dígitos 4 e 7 do treino e depois forcei o modelo a prever justamente essas classes. Esse teste mostra que o modelo sempre tenta encaixar a imagem em alguma classe conhecida, mesmo quando não viu aquele dígito antes. Por isso ele ajuda a discutir a falsa certeza em modelos de IA.
