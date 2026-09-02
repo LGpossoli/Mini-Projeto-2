@@ -81,7 +81,13 @@ def mostrar_distribuicao_classes(y, nome_arquivo="distribuicao_classes.png"):
     print(distribuicao)
 
     plt.figure(figsize=(9, 4))
-    sns.barplot(x=distribuicao.index, y=distribuicao.values, palette="viridis")
+    sns.barplot(
+        x=distribuicao.index,
+        y=distribuicao.values,
+        hue=distribuicao.index,
+        palette="viridis",
+        legend=False,
+    )
     plt.title("Distribuição dos dígitos no MNIST")
     plt.xlabel("Dígito")
     plt.ylabel("Quantidade de imagens")
