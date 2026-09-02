@@ -17,3 +17,7 @@ Este arquivo resume como eu organizei o desenvolvimento do mini-projeto. A ideia
 ## Etapa de EDA
 
 Na primeira etapa eu carreguei a base MNIST, conferi as dimensões de `X` e `y`, analisei a distribuição dos dígitos e gerei uma grade visual com exemplos de 0 a 9. Essa parte ajuda a entender que cada imagem 28x28 é transformada em 784 valores de pixel.
+
+## Etapa de pré-processamento
+
+Depois da análise inicial, eu dividi os dados em treino, validação e teste usando estratificação. Fiz isso para manter a proporção dos dígitos em cada conjunto. Também normalizei os pixels para ficarem entre 0 e 1, porque assim os modelos trabalham com valores mais equilibrados.
