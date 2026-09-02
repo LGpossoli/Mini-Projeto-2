@@ -1,0 +1,35 @@
+# Plano de Projeto
+
+Este arquivo resume como eu organizei o desenvolvimento do mini-projeto. A ideia foi separar o trabalho em etapas para ficar mais fácil de testar, explicar e versionar no GitHub.
+
+## Branches usadas
+
+- `main`: guarda a versão final entregue.
+- `develop`: junta as etapas antes de mandar para a `main`.
+- `feature/eda-mnist`: carregamento do MNIST e análise inicial das imagens.
+- `feature/preprocessamento`: divisão estratificada e normalização dos pixels.
+- `feature/modelos`: treinamento dos modelos KNN, Random Forest e MLP.
+- `feature/avaliacao`: métricas, matrizes de confusão e comparação dos modelos.
+- `feature/robustez-ood`: teste com classes ocultas e análise de falsa certeza.
+- `feature/imagens-proprias`: leitura e tratamento das imagens manuscritas próprias.
+- `feature/documentacao`: README, requirements e roteiro do vídeo.
+
+## Etapa de EDA
+
+Na primeira etapa eu carreguei a base MNIST, conferi as dimensões de `X` e `y`, analisei a distribuição dos dígitos e gerei uma grade visual com exemplos de 0 a 9. Essa parte ajuda a entender que cada imagem 28x28 é transformada em 784 valores de pixel.
+
+## Etapa de pré-processamento
+
+Depois da análise inicial, eu dividi os dados em treino, validação e teste usando estratificação. Fiz isso para manter a proporção dos dígitos em cada conjunto. Também normalizei os pixels para ficarem entre 0 e 1, porque assim os modelos trabalham com valores mais equilibrados.
+
+## Etapa de modelos
+
+Eu escolhi três modelos para comparar comportamentos diferentes. O KNN foi usado por trabalhar com proximidade entre exemplos, a Random Forest por combinar várias árvores de decisão e a MLP por representar uma rede neural simples. Em cada modelo eu testei mais de uma configuração para não depender de um único ajuste.
+
+## Etapa de robustez OOD
+
+No teste de robustez, eu removi os dígitos 4 e 7 do treino e depois forcei o modelo a prever justamente essas classes. Esse teste mostra que o modelo sempre tenta encaixar a imagem em alguma classe conhecida, mesmo quando não viu aquele dígito antes. Por isso ele ajuda a discutir a falsa certeza em modelos de IA.
+
+## Etapa de imagens próprias
+
+Para testar imagens feitas por mim, deixei a pasta `data/minhas_imagens`. O código lê a imagem, converte para escala de cinza, inverte as cores quando necessário, centraliza o desenho, redimensiona para 28x28 e normaliza antes de enviar para o modelo.
