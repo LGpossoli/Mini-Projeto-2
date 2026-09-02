@@ -21,3 +21,7 @@ Na primeira etapa eu carreguei a base MNIST, conferi as dimensões de `X` e `y`,
 ## Etapa de pré-processamento
 
 Depois da análise inicial, eu dividi os dados em treino, validação e teste usando estratificação. Fiz isso para manter a proporção dos dígitos em cada conjunto. Também normalizei os pixels para ficarem entre 0 e 1, porque assim os modelos trabalham com valores mais equilibrados.
+
+## Etapa de modelos
+
+Eu escolhi três modelos para comparar comportamentos diferentes. O KNN foi usado por trabalhar com proximidade entre exemplos, a Random Forest por combinar várias árvores de decisão e a MLP por representar uma rede neural simples. Em cada modelo eu testei mais de uma configuração para não depender de um único ajuste.
