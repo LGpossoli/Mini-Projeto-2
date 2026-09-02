@@ -29,3 +29,7 @@ Eu escolhi três modelos para comparar comportamentos diferentes. O KNN foi usad
 ## Etapa de robustez OOD
 
 No teste de robustez, eu removi os dígitos 4 e 7 do treino e depois forcei o modelo a prever justamente essas classes. Esse teste mostra que o modelo sempre tenta encaixar a imagem em alguma classe conhecida, mesmo quando não viu aquele dígito antes. Por isso ele ajuda a discutir a falsa certeza em modelos de IA.
+
+## Etapa de imagens próprias
+
+Para testar imagens feitas por mim, deixei a pasta `data/minhas_imagens`. O código lê a imagem, converte para escala de cinza, inverte as cores quando necessário, centraliza o desenho, redimensiona para 28x28 e normaliza antes de enviar para o modelo.
