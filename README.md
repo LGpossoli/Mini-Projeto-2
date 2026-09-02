@@ -28,6 +28,7 @@ Mini-Projeto-2/
 ├── mini_projeto_2.py
 ├── requirements.txt
 ├── README.md
+├── PLANO_DE_PROJETO.md
 ├── script_video.txt
 ├── data/
 │   └── minhas_imagens/
@@ -107,6 +108,8 @@ O código faz a conversão para escala de cinza, ajusta a imagem para 28x28 pixe
 - `feature/robustez-ood`: teste com classes ocultas.
 - `feature/imagens-proprias`: teste com imagens próprias.
 - `feature/documentacao`: README, requirements e roteiro do vídeo.
+
+O arquivo `PLANO_DE_PROJETO.md` também resume como eu organizei essas etapas e o objetivo de cada branch.
 
 ## Melhorias possíveis
 

@@ -22,7 +22,7 @@ Para demonstrar o funcionamento, eu posso abrir o notebook MiniProjeto2_MNIST.ip
 
 Para executar o sistema em outra máquina, primeiro é preciso criar um ambiente virtual, instalar as dependências com pip install -r requirements.txt e depois rodar o notebook ou o arquivo Python. Como o MNIST é baixado pelo scikit-learn, é necessário ter internet na primeira execução.
 
-Sobre a organização no GitHub, a ideia foi usar a branch main para a versão final e a develop para juntar as funcionalidades. Também planejei branches separadas para cada parte: EDA, pré-processamento, modelos, avaliação, robustez OOD, imagens próprias e documentação. Essa separação ajuda a deixar o desenvolvimento mais organizado.
+Sobre a organização no GitHub, eu usei a branch main para a versão final e a develop para juntar as funcionalidades antes da entrega. Também criei branches separadas para cada parte: EDA, pré-processamento, modelos, avaliação, robustez OOD, imagens próprias e documentação. Essa separação ajuda a deixar o desenvolvimento mais organizado e facilita explicar o que foi feito em cada etapa.
 
 Uma coisa que eu acho que poderia melhorar no código é usar uma rede neural convolucional, porque ela costuma funcionar melhor com imagens. Também poderia criar uma interface gráfica em Python para enviar imagens próprias com mais facilidade. Outro ponto seria treinar com a base completa, caso o computador tenha mais tempo e desempenho disponível.
 
