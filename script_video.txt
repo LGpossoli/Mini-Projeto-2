@@ -1,0 +1,31 @@
+Olá, meu nome é [seu nome] e vou apresentar o meu Mini-Projeto 2, que é um sistema de análise preditiva para classificar dígitos manuscritos usando a base MNIST.
+
+O objetivo do sistema é receber imagens de números escritos à mão e prever qual dígito aparece na imagem, de 0 até 9. Para isso, eu montei um pipeline em Python que carrega a base, prepara os dados, treina modelos diferentes e compara os resultados.
+
+Primeiro, eu organizei o projeto por etapas. Separei uma parte para análise exploratória, outra para pré-processamento, outra para treinamento dos modelos, depois avaliação dos resultados e por fim os testes de robustez. Também deixei uma parte para testar imagens próprias, que podem ser colocadas na pasta data/minhas_imagens.
+
+Na primeira fase, eu carreguei o dataset MNIST usando o scikit-learn. Esse dataset tem imagens em escala de cinza com tamanho 28 por 28 pixels. No código, cada imagem vira uma linha com 784 valores, porque 28 vezes 28 é igual a 784. Esses valores representam a intensidade dos pixels, indo de 0 até 255.
+
+Depois eu fiz uma análise da distribuição das classes para ver se os dígitos estavam bem balanceados. Também gerei uma grade com exemplos dos números de 0 a 9, para visualizar melhor o tipo de dado que o modelo vai receber.
+
+Na fase de pré-processamento, eu dividi os dados em treino, validação e teste usando estratificação. Fiz isso para manter a proporção dos dígitos em cada parte da base. Depois normalizei os pixels dividindo por 255, deixando os valores entre 0 e 1. Isso ajuda os modelos a trabalharem melhor, porque todos os atributos ficam na mesma escala.
+
+Na fase de modelos, eu treinei três algoritmos diferentes: KNN, Random Forest e MLP. O KNN classifica olhando os exemplos mais parecidos. A Random Forest usa várias árvores de decisão para chegar em uma resposta. A MLP é uma rede neural simples, que tenta aprender padrões nos pixels.
+
+Em cada modelo eu variei hiperparâmetros. No KNN, eu testei valores diferentes de vizinhos e pesos. Na Random Forest, eu testei quantidade de árvores e profundidade. Na MLP, eu testei formatos diferentes de camadas e outros ajustes. A escolha da melhor versão foi feita usando o conjunto de validação, para não usar o teste antes da hora.
+
+Depois eu avaliei os modelos no conjunto de teste. Mostrei a acurácia, precisão, recall e F1-score em porcentagem. Também gerei uma matriz de confusão para cada modelo, porque ela ajuda a ver quais dígitos foram mais confundidos. Essa parte é importante porque só olhar a acurácia pode esconder alguns erros específicos.
+
+O projeto também tem um teste de robustez. Eu ocultei os dígitos 4 e 7 durante o treino e depois testei o modelo só com esses dígitos. A ideia foi observar como o modelo reage quando recebe algo que ele nunca viu antes. Mesmo sem conhecer essas classes, ele ainda tenta classificar como alguma classe conhecida. Isso mostra a falsa certeza dos modelos de IA, porque eles podem dar uma resposta mesmo quando a situação não faz parte do treinamento.
+
+Para demonstrar o funcionamento, eu posso abrir o notebook MiniProjeto2_MNIST.ipynb e executar as células em ordem. Também posso rodar pelo terminal do VS Code com o comando python mini_projeto_2.py. O código salva gráficos na pasta figuras, resultados em CSV na pasta resultados e o melhor modelo na pasta models.
+
+Para executar o sistema em outra máquina, primeiro é preciso criar um ambiente virtual, instalar as dependências com pip install -r requirements.txt e depois rodar o notebook ou o arquivo Python. Como o MNIST é baixado pelo scikit-learn, é necessário ter internet na primeira execução.
+
+Sobre a organização no GitHub, a ideia foi usar a branch main para a versão final e a develop para juntar as funcionalidades. Também planejei branches separadas para cada parte: EDA, pré-processamento, modelos, avaliação, robustez OOD, imagens próprias e documentação. Essa separação ajuda a deixar o desenvolvimento mais organizado.
+
+Uma coisa que eu acho que poderia melhorar no código é usar uma rede neural convolucional, porque ela costuma funcionar melhor com imagens. Também poderia criar uma interface gráfica em Python para enviar imagens próprias com mais facilidade. Outro ponto seria treinar com a base completa, caso o computador tenha mais tempo e desempenho disponível.
+
+As escolhas do projeto foram feitas pensando em comparação e entendimento. Eu usei o KNN por ser simples e baseado em distância, a Random Forest por ser um modelo clássico forte e a MLP para representar uma rede neural. Também usei matriz de confusão e métricas ponderadas porque o problema tem várias classes, então é importante avaliar o comportamento geral e também os erros por dígito.
+
+Com isso, o sistema consegue cumprir o objetivo principal: classificar dígitos manuscritos, comparar modelos, analisar erros e testar situações fora do padrão ideal de treino.

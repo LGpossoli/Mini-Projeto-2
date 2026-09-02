@@ -1,0 +1,17 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
+
+# Saídas geradas durante os testes
+figuras/*.png
+resultados/*.csv
+models/*.joblib
+
+# O PDF do enunciado fica local, mas não precisa ser alterado
