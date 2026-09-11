@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from PIL import Image, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 from sklearn.datasets import fetch_openml
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
@@ -382,19 +382,52 @@ def treinar_teste_ood(X_treino, y_treino, X_teste, y_teste, melhores_modelos, cl
 def preprocessar_imagem_propria(caminho_imagem):
     """Converte uma imagem própria para o formato usado pelo MNIST."""
     imagem = Image.open(caminho_imagem).convert("L")
+    imagem = ImageOps.autocontrast(imagem)
     imagem_array = np.array(imagem).astype(np.float32) / 255.0
 
     # Se o fundo estiver claro, inverto para ficar parecido com o MNIST.
     if imagem_array.mean() > 0.5:
         imagem = ImageOps.invert(imagem)
-        imagem_array = np.array(imagem).astype(np.float32) / 255.0
 
-    mascara = imagem_array > 0.15
+    imagem = ImageOps.autocontrast(imagem)
+    imagem_array = np.array(imagem).astype(np.float32) / 255.0
+    histograma, _ = np.histogram((imagem_array * 255).astype(np.uint8), bins=256, range=(0, 256))
+    total = imagem_array.size
+    soma_total = np.dot(np.arange(256), histograma)
+    soma_fundo = 0.0
+    peso_fundo = 0.0
+    melhor_variancia = -1.0
+    melhor_limiar = 0
+
+    for limiar, quantidade in enumerate(histograma):
+        peso_fundo += quantidade
+        if peso_fundo == 0:
+            continue
+
+        peso_frente = total - peso_fundo
+        if peso_frente == 0:
+            break
+
+        soma_fundo += limiar * quantidade
+        media_fundo = soma_fundo / peso_fundo
+        media_frente = (soma_total - soma_fundo) / peso_frente
+        variancia = peso_fundo * peso_frente * (media_fundo - media_frente) ** 2
+
+        if variancia > melhor_variancia:
+            melhor_variancia = variancia
+            melhor_limiar = limiar
+
+    mascara = imagem_array > max(melhor_limiar / 255.0, 0.12)
     if mascara.any():
         linhas, colunas = np.where(mascara)
         topo, baixo = linhas.min(), linhas.max()
         esquerda, direita = colunas.min(), colunas.max()
         imagem = imagem.crop((esquerda, topo, direita + 1, baixo + 1))
+
+    imagem_array = np.array(imagem).astype(np.float32) / 255.0
+    imagem_array = np.where(imagem_array > max(melhor_limiar / 255.0, 0.12), imagem_array, 0.0)
+    imagem_array = np.clip(imagem_array * 1.8, 0.0, 1.0)
+    imagem = Image.fromarray((imagem_array * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3))
 
     imagem.thumbnail((20, 20), Image.Resampling.LANCZOS)
     canvas = Image.new("L", (28, 28), 0)
